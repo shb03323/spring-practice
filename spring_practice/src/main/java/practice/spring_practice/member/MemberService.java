@@ -1,6 +1,6 @@
 package practice.spring_practice.member;
 
-public interface MemoryService {
+public interface MemberService {
 
     void join(Member member);
 
