@@ -1,5 +1,7 @@
 package practice.spring_practice.order;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import practice.spring_practice.discount.DiscountPolicy;
 import practice.spring_practice.discount.FixDiscountPolicy;
 import practice.spring_practice.discount.RateDiscountPolicy;
@@ -7,11 +9,13 @@ import practice.spring_practice.member.Member;
 import practice.spring_practice.member.MemberRepository;
 import practice.spring_practice.member.MemoryMemberRepository;
 
+@Component
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
