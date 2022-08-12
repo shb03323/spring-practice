@@ -1,13 +1,12 @@
 package practice.spring_practice.order;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import practice.spring_practice.discount.DiscountPolicy;
-import practice.spring_practice.discount.FixDiscountPolicy;
-import practice.spring_practice.discount.RateDiscountPolicy;
 import practice.spring_practice.member.Member;
 import practice.spring_practice.member.MemberRepository;
-import practice.spring_practice.member.MemoryMemberRepository;
 
 @Component
 public class OrderServiceImpl implements OrderService {
@@ -15,28 +14,11 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
-//    @Autowired
-//    public void setMemberRepository(MemberRepository memberRepository) {
-//        System.out.println("memberRepository = " + memberRepository);
-//        this.memberRepository = memberRepository;
-//    }
-//
-//    @Autowired
-//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
-//        System.out.println("discountPolicy = " + discountPolicy);
-//        this.discountPolicy = discountPolicy;
-//    }
-
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
-
-//    @Autowired
-//    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//        this.memberRepository = memberRepository;
-//        this.discountPolicy = discountPolicy;
-//    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
